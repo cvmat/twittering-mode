@@ -45,8 +45,12 @@
 (require 'cl)
 (require 'xml)
 (require 'parse-time)
-(require 'mm-url)
 (require 'ffap)
+(require 'mm-url nil t)
+
+(when (< emacs-major-version 22)
+  (require 'un-define)
+  (set-terminal-coding-system 'utf-8))
 
 (defconst twittering-mode-version "0.8")
 (defconst twittering-max-number-of-tweets-on-retrieval 200
@@ -1250,14 +1254,15 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
 (defun twittering-tinyurl-replace-at-point ()
   "Replace the url at point with a tiny version."
   (interactive)
-  (let ((url-bounds (bounds-of-thing-at-point 'url)))
-    (when url-bounds
-      (let ((url (twittering-tinyurl-get (thing-at-point 'url))))
-	(when url
-	  (save-restriction
-	    (narrow-to-region (car url-bounds) (cdr url-bounds))
-	    (delete-region (point-min) (point-max))
-	    (insert url)))))))
+  (when (featurep 'mm-url)
+    (let ((url-bounds (bounds-of-thing-at-point 'url)))
+      (when url-bounds
+	(let ((url (twittering-tinyurl-get (thing-at-point 'url))))
+	  (when url
+	    (save-restriction
+	      (narrow-to-region (car url-bounds) (cdr url-bounds))
+	      (delete-region (point-min) (point-max))
+	      (insert url))))))))
 
 ;;;
 ;;; Commands
