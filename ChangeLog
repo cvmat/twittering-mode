@@ -1,3 +1,8 @@
+2009-12-21  Tadashi Matsuo  <tad@mymail.twin.jp>
+
+	* twittering-mode.el (twittering-http-application-headers):
+	`Content-Length' is added to `headers'.
+
 2009-12-20  Yuto Hayamizu  <y.hayamizu@gmail.com>
 
 	* twittering-mode.el (twittering-update-mode-line): add
