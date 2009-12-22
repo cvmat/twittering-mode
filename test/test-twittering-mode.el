@@ -102,9 +102,14 @@
              (twittering-get-timeline-spec host method))))
   (test-assert-ok (test-restore-timeline-spec "~"))
   (test-assert-ok (test-restore-timeline-spec "@"))
+  (test-assert-ok (test-restore-timeline-spec "M"))
   (test-assert-ok (test-restore-timeline-spec "-"))
   (test-assert-ok (test-restore-timeline-spec "USER"))
   (test-assert-ok (test-restore-timeline-spec "USER/LISTNAME"))
+  (test-assert-ok (test-restore-timeline-spec "H"))
+  (test-assert-ok (test-restore-timeline-spec "B"))
+  (test-assert-ok (test-restore-timeline-spec "T"))
+  (test-assert-ok (test-restore-timeline-spec "O"))
 
   (test-assert-eq nil (twittering-get-host-method-from-timeline-spec ""))
 
@@ -116,6 +121,9 @@
     "twitter.com" "statuses/replies"))
   (test-assert-ok
    (test-restore-host-method
+    "twitter.com" "statuses/mentions"))
+  (test-assert-ok
+   (test-restore-host-method
     "twitter.com" "statuses/public_timeline"))
   (test-assert-ok
    (test-restore-host-method
@@ -123,6 +131,18 @@
   (test-assert-ok
    (test-restore-host-method
     "api.twitter.com" "1/USER/lists/LISTNAME/statuses"))
+  (test-assert-ok
+   (test-restore-host-method
+    "api.twitter.com" "1/statuses/home_timeline"))
+  (test-assert-ok
+   (test-restore-host-method
+    "api.twitter.com" "1/statuses/retweeted_by_me"))
+  (test-assert-ok
+   (test-restore-host-method
+    "api.twitter.com" "1/statuses/retweeted_to_me"))
+  (test-assert-ok
+   (test-restore-host-method
+    "api.twitter.com" "1/statuses/retweets_of_me"))
 
   (test-assert-string-equal
    "USERNAME"
