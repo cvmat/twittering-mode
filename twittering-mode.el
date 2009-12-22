@@ -198,7 +198,7 @@ SSL connections use 'curl' command as a backend.")
        (setq twittering-last-timeline-retrieved
 	     `("twitter.com" ,twittering-last-timeline-retrieved))))
 
-(defun twittering-get-timeline-spec(&optional host method)
+(defun twittering-get-timeline-spec (&optional host method)
   (let ((host (or host (twittering-last-host)))
 	(method (or method (twittering-last-method))))
     (cond
@@ -221,7 +221,7 @@ SSL connections use 'curl' command as a backend.")
        (t nil)))
      (t nil))))
 
-(defun twittering-get-host-method-from-timeline-spec(timeline-spec)
+(defun twittering-get-host-method-from-timeline-spec (timeline-spec)
   (cond
    ((not (stringp timeline-spec)) nil)
    ((string= "" timeline-spec) nil)
